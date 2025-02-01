@@ -1,4 +1,3 @@
-import kaleido
 import streamlit as st
 from plots.plot_2d import plot_2d
 from plots.plot_3d import plot_3d
