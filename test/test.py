@@ -1,39 +1,104 @@
-import kaleido
-import plotly
-import plotly.graph_objects as go
-import numpy as np
-from utils import create_cuboid_mesh
+import pandas as pd
+import matplotlib.pyplot as plt
 
-xpos, ypos = np.meshgrid(np.arange(10), np.arange(10))
-xpos = xpos.flatten()
-ypos = ypos.flatten()
+# CSV-Datei laden
+df = pd.read_csv("Sinus_Daten.csv")
 
-heights = np.sin(xpos / 2.0) * np.cos(ypos / 2.0) * 5.0
+# Figure erstellen
+fig = plt.figure(figsize=(8, 5), dpi=100)
+fig.set_facecolor("#ffffff")
 
-fig_plotly = go.Figure()
 
-for x0, y0, h in zip(xpos, ypos, heights):
-    dx = 0.8
-    dy = 0.8
-    ox = x0 + (1 - dx) / 2
-    oy = y0 + (1 - dy) / 2
-    origin = (ox, oy, 0)
-    size = (dx, dy, h)
-    cuboid = create_cuboid_mesh(origin, size, "#00f900")
-    fig_plotly.add_trace(cuboid)
+# Subplot: Großer Subplot
+ax = fig.add_axes([0.05, 0.5, 0.9, 0.45])
+ax.set_facecolor("#ffffff")
 
-fig_plotly.update_layout(
-    title="Mein Plot",
-    scene=dict(
-        xaxis_title="X-Achse",
-        yaxis_title="Y-Achse",
-        zaxis_title="Höhe",
-    ),
-    paper_bgcolor="#FFFFFF",
-    plot_bgcolor="#FFFFFF",
-    width=600,
-    height=400,
-)
+# Graph: Graph 2
+ax.plot(df["X"], df["Kosinus"], 
+        color="#00f900", 
+        linestyle="solid", 
+        linewidth=2.0, 
+        marker="", 
+        label="Graph 2")
 
-plotly.io.write_image(fig_plotly, "plotly.png", engine="kaleido")
-fig_plotly.show()
+# Graph: Graph 3
+ax.plot(df["X"], df["Logarithmus"], 
+        color="#00f900", 
+        linestyle="solid", 
+        linewidth=2.0, 
+        marker="", 
+        label="Graph 3")
+
+# Achsen-Einstellungen
+ax.set_xlim((0, 100))
+ax.set_ylim((0, 100))
+ax.set_xscale("linear")
+ax.set_yscale("linear")
+ax.set_title("Großer Subplot", fontsize=14)
+ax.tick_params(axis='both', which='major', labelsize=10, 
+               length=5, width=1, 
+               colors="#000000")
+ax.xaxis.label.set_color("#000000")
+ax.yaxis.label.set_color("#000000")
+
+# Raster aktivieren
+ax.grid(True, linestyle="-", alpha=0.7)
+
+
+# Subplot: Kleiner Subplot 1
+ax = fig.add_axes([0.05, 0.05, 0.4, 0.35])
+ax.set_facecolor("#ffffff")
+
+# Graph: Graph 2
+ax.plot(df["X"], df["Kosinus"], 
+        color="#00f900", 
+        linestyle="solid", 
+        linewidth=2.0, 
+        marker="", 
+        label="Graph 2")
+
+# Achsen-Einstellungen
+ax.set_xlim((0, 100))
+ax.set_ylim((0, 100))
+ax.set_xscale("linear")
+ax.set_yscale("linear")
+ax.set_title("Kleiner Subplot 1", fontsize=14)
+ax.tick_params(axis='both', which='major', labelsize=10, 
+               length=5, width=1, 
+               colors="#000000")
+ax.xaxis.label.set_color("#000000")
+ax.yaxis.label.set_color("#000000")
+
+# Raster aktivieren
+ax.grid(True, linestyle="-", alpha=0.7)
+
+
+# Subplot: Kleiner Subplot 2
+ax = fig.add_axes([0.55, 0.05, 0.4, 0.35])
+ax.set_facecolor("#ffffff")
+
+# Graph: Graph 3
+ax.plot(df["X"], df["Logarithmus"], 
+        color="#00f900", 
+        linestyle="solid", 
+        linewidth=2.0, 
+        marker="", 
+        label="Graph 3")
+
+# Achsen-Einstellungen
+ax.set_xlim((0, 100))
+ax.set_ylim((0, 100))
+ax.set_xscale("linear")
+ax.set_yscale("linear")
+ax.set_title("Kleiner Subplot 2", fontsize=14)
+ax.tick_params(axis='both', which='major', labelsize=10, 
+               length=5, width=1, 
+               colors="#000000")
+ax.xaxis.label.set_color("#000000")
+ax.yaxis.label.set_color("#000000")
+
+# Raster aktivieren
+ax.grid(True, linestyle="-", alpha=0.7)
+
+# Diagramm anzeigen
+plt.show()

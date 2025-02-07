@@ -326,6 +326,7 @@ paket-files/
 .cr/personal
 
 # Python Tools for Visual Studio (PTVS)
+/__pycache__
 __pycache__/
 *.pyc
 
@@ -398,3 +399,14 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#Custom
+/test
+/.venv
+/.devcontainer
+sidebar.py
+test/test.py
+test/test.py
+__pycache__/code_generator.cpython-312.pyc
+__pycache__/config.cpython-312.pyc
+__pycache__/utils.cpython-312.pyc
