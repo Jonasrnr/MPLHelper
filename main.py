@@ -406,18 +406,6 @@ if figure_settings["library"] == "Matplotlib":
 
     st.pyplot(fig)
 
-    fig.update_layout(
-        title=figure_settings["title"],
-        width=figure_settings["fig_width"] * 100,
-        height=figure_settings["fig_height"] * 100,
-        legend=dict(font=dict(size=figure_settings["legend_fontsize"]), orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        paper_bgcolor=figure_settings["background_color"],
-        plot_bgcolor=figure_settings["axes_background_color"],
-        font=dict(family=figure_settings["font_family"])
-    )
-
-    st.plotly_chart(fig)
-
 # 🔗 Python-Code zum Kopieren generieren
 code = utils.generate_code()
 
